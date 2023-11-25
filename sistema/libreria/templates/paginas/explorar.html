@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %} Explorar Emprendimientos {% endblock %}
+
+{% block contenido %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Explorar Emprendimientos</h1>
+
+        <!-- Agrega el botón para ingresar un emprendimiento -->
+        <a href="{% url 'registrar_emprendimiento' %}" class="btn btn-primary mb-3">Ingresar Emprendimiento</a>
+
+        <div class="row">
+            {% for emprendimiento in emprendimientos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if emprendimiento.imagen %}
+                            <img src="{{ emprendimiento.imagen.url }}" class="card-img-top" alt="{{ emprendimiento.nombre }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text"><strong>Nombre:</strong> {{ emprendimiento.nombre }}</p>
+                            <p class="card-text"><strong>Descripción:</strong> {{ emprendimiento.descripcion }}</p>
+                            {% if emprendimiento.imagen %}
+                                <p class="card-text"><strong>Imagen:</strong> <img src="{{ emprendimiento.imagen.url }}" alt="{{ emprendimiento.nombre }}"></p>
+                            {% endif %}
+                            <p class="card-text"><strong>Estado:</strong> {{ emprendimiento.get_estado_display }}</p>
+                            <a href="#" class="btn btn-primary">Detalles</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+

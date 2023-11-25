@@ -1,0 +1,36 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block titulo %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-csQN/Ae5qONASMOO0XNhGnJUvXcNlRuoCyH/NuUZzQ+TmSwUHEg2RtLuPAA+3oBH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Puedes crear tu propio archivo CSS y enlazarlo aquí -->
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="nav navbar-nav">
+            <a class="nav-item nav-link active" href="{% url 'inicio' %}">Inicio</a>
+            <a class="nav-item nav-link" href="{% url 'acerca_de_nosotros' %}">Acerca de Nosotros</a>
+            <a class="nav-item nav-link" href="{% url 'contacto' %}">Contáctanos</a>
+            <a class="nav-item nav-link" href="{% url 'explorar' %}">Explorar</a>
+            <a class="nav-item nav-link active" href="{% url 'planes_y_precios' %}">Planes y Precios</a>
+        </div>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-item nav-link active" href="{% url 'registro' %}">Registrarse</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% block contenido %}  {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

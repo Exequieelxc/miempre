@@ -1,0 +1,81 @@
+<!-- En registro.html -->
+{% extends "base.html" %}
+
+{% block titulo %} Registro {% endblock %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% if not registro_completado %}
+                    <h1>Registro</h1>
+                    <div id="seleccionRegistro">
+                        <h2>Seleccione el tipo de registro</h2>
+                        <button id="btnEmprendedor">Emprendedor</button>
+                        <button id="btnEmpresaGrande">Empresa Grande</button>
+                    </div>
+                {% endif %}
+
+                <div id="formEmprendedor" style="display: none;">
+                    <h2>Emprendedor</h2>
+                    <form method="post" action="{% url 'registrar_emprendedor' %}">
+                        {% csrf_token %}
+                        <label for="usuario_emprendedor">Usuario:</label>
+                        <input type="text" name="usuario_emprendedor" required>
+                        <br>
+                        <label for="contrasena_emprendedor">Contraseña:</label>
+                        <input type="password" name="contrasena_emprendedor" required>
+                        <br>
+                        <button type="submit">Registrar Emprendedor</button>
+                    </form>
+                    <br>
+                    <a href="#" onclick="volverASeleccion()">Volver a la selección de registro</a>
+                </div>
+
+                <div id="formEmpresaGrande" style="display: none;">
+                    <h2>Empresa Grande</h2>
+                    <form method="post" action="{% url 'registrar_empresa_grande' %}">
+                        {% csrf_token %}
+                        <label for="usuario_empresa_grande">Usuario:</label>
+                        <input type="text" name="usuario_empresa_grande" required>
+                        <br>
+                        <label for="contrasena_empresa_grande">Contraseña:</label>
+                        <input type="password" name="contrasena_empresa_grande" required>
+                        <br>
+                        <button type="submit">Registrar Empresa Grande</button>
+                    </form>
+                    <br>
+                    <a href="#" onclick="volverASeleccion()">Volver a la selección de registro</a>
+                </div>
+
+                {% if registro_completado %}
+                    <p>¡Registro completado con éxito!</p>
+                    <a href="{% url 'registro' %}" class="btn btn-primary">Volver al Registro</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function volverASeleccion() {
+            $("#seleccionRegistro").show();
+            $("#formEmprendedor").hide();
+            $("#formEmpresaGrande").hide();
+        }
+
+        $(document).ready(function(){
+            $("#btnEmprendedor").click(function(){
+                $("#seleccionRegistro").hide();
+                $("#formEmprendedor").show();
+                $("#formEmpresaGrande").hide();
+            });
+
+            $("#btnEmpresaGrande").click(function(){
+                $("#seleccionRegistro").hide();
+                $("#formEmprendedor").hide();
+                $("#formEmpresaGrande").show();
+            });
+        });
+    </script>
+{% endblock %}
